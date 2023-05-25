@@ -1,0 +1,8 @@
+[package]
+name = "playground_server"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+playground_shared = { path = "../shared" }
+naia-bevy-server = "0.21.0"

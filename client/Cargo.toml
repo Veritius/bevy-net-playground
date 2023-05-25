@@ -1,0 +1,11 @@
+[package]
+name = "playground_client"
+version = "0.0.0"
+edition = "2021"
+
+[dependencies]
+playground_shared = { path = "../shared" }
+naia-bevy-client = "0.21.0"
+
+[features]
+default = ["playground_shared/client"]
