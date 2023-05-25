@@ -1,6 +1,5 @@
 use naia_bevy_shared::{Message, ProtocolPlugin};
-
-use crate::version_to_string;
+use crate::version_string;
 
 pub struct AuthenticationNetPlugin;
 
@@ -14,14 +13,15 @@ impl ProtocolPlugin for AuthenticationNetPlugin {
 #[derive(Message)]
 pub struct AuthMessage {
     /// The version of the client trying to join.
-    /// You should use `version_to_string` to set this.
+    /// This should be a valid [semantic versioning](https://semver.org/) version, or the client will always be rejected by the server.
+    /// The best way to get this string is by using [version_string].
     pub version: String,
 }
 
 impl AuthMessage {
     pub fn new() -> AuthMessage {
         Self {
-            version: version_to_string(),
+            version: version_string(),
         }
     }
 }
