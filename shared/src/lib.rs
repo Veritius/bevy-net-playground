@@ -1,12 +1,13 @@
 pub use bevy;
 pub use naia_bevy_shared;
+pub use once_cell;
 pub use semver;
 pub use bevy::ecs as bevy_ecs;
 
 pub mod network;
 
-use bevy::render::once_cell::sync::Lazy;
 use semver::Version;
+use once_cell::sync::Lazy;
 
 /// The version of the game.
 pub static GAME_VERSION: Lazy<Version> = Lazy::new(|| Version::parse(env!("CARGO_PKG_VERSION")).unwrap());
