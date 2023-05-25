@@ -1,3 +1,5 @@
+pub mod network;
+
 use naia_bevy_client::{Plugin as ClientPlugin, ClientConfig};
 use playground_shared::{bevy::prelude::*, network::protocol};
 
