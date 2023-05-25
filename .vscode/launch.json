@@ -1,0 +1,54 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "Run client and server",
+            "configurations": ["Run client", "Run server"]
+        }
+    ],
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run client",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=playground_client",
+                    "--package=playground_client"
+                ],
+                "filter": {
+                    "name": "playground_client",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run server",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=playground_server",
+                    "--package=playground_server"
+                ],
+                "filter": {
+                    "name": "playground_server",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "env": {
+                "BIND_IP": "127.0.0.1",
+                "BIND_PORT": "12345",
+            },
+            "cwd": "${workspaceFolder}"
+        },
+    ]
+}

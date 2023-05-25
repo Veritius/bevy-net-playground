@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 playground_shared = { path = "../shared" }
-naia-bevy-server = "0.21.0"
+naia-bevy-server = { version = "0.21.0", features = ["transport_udp"] }
