@@ -53,7 +53,11 @@ pub(super) fn try_connect_system(
     let socket = Socket::new(&socket_addr, None);
     client.connect(socket);
 
+    // Log connection
     info!("Trying to connect to {}:{}", event.ip_address, event.port);
+
+    // Clear events
+    events.clear();
 }
 
 /// Write this event to try and connect to a server.
