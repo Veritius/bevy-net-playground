@@ -1,5 +1,5 @@
 use naia_bevy_shared::{Message, ProtocolPlugin};
-use crate::version_string;
+use crate::version::version_string;
 
 pub struct AuthenticationNetPlugin;
 

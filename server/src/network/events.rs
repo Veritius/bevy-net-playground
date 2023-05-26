@@ -1,5 +1,5 @@
 use naia_bevy_server::{Server, events::{AuthEvents, ConnectEvent, DisconnectEvent}};
-use playground_shared::{bevy::prelude::*, network::auth::AuthMessage, GAME_VERSION};
+use playground_shared::{bevy::prelude::*, network::auth::AuthMessage, version::GAME_VERSION};
 use crate::network::entity::NetworkUserEntity;
 
 use super::room::HubRoom;
