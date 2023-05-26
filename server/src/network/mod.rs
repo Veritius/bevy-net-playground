@@ -16,11 +16,15 @@ impl Plugin for NetworkManagementPlugin {
     fn build(&self, app: &mut App) {
         app.add_startup_system(bind_to_ip);
         app.add_startup_system(initialise_hub_room);
-        
+
         app.add_systems((
             events::auth_events,
             events::connect_events,
             events::disconnect_events,
         ).chain().in_set(ReceiveEvents));
+
+        app.add_systems((
+            entity::disconnect_on_removed_component_system,
+        ));
     }
 }
