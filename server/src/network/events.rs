@@ -17,7 +17,7 @@ pub(super) fn auth_events(
             let client_version = playground_shared::semver::Version::parse(&auth.version);
             if client_version.is_err() || client_version.unwrap() != *GAME_VERSION {
                 server.reject_connection(&user_key);
-                info!("Client at address {} was rejected for invalid version: {}", &auth.version, &address);
+                info!("Client at address {} was rejected for invalid version: {}", &address, &auth.version);
                 continue;
             }
 
