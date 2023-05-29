@@ -39,7 +39,6 @@ pub fn disconnect_exclusive_system(
                         keys_to_disconnect.push(*state_mut.2.0.get(&entity)
                             .expect("Entity was not in removal memory"));
                         state_mut.2.0.remove(&entity);
-                        state_mut.3.entity(entity).despawn();
                     },
                     Err(_) => {},
                 }
@@ -56,7 +55,6 @@ pub fn disconnect_exclusive_system(
                 // Delete from map and entities
                 if ent != Entity::PLACEHOLDER {
                     state_mut.2.0.remove(&ent);
-                    state_mut.3.entity(ent).despawn();
                 }
             },
         }
