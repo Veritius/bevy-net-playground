@@ -68,7 +68,6 @@ pub fn disconnect_exclusive_system(
         for key in keys_to_disconnect {
             let world_mut = WorldMut::new(world);
             server.user_mut(&key).disconnect(world_mut);
-            println!("DEBUG: Disconnected someone ?");
         }
     });
 }
