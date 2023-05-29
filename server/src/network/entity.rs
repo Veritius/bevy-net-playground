@@ -60,9 +60,6 @@ pub fn disconnect_exclusive_system(
         }
     }
 
-    // Drop our mutable reference
-    drop(state_mut);
-
     // Disconnect all players
     world.resource_scope(|world, mut server: Mut<NaiaServer<Entity>>| {
         for key in keys_to_disconnect {
