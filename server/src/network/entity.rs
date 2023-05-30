@@ -28,6 +28,9 @@ pub fn disconnect_exclusive_system(
     )>::new(world);
     let mut state_mut = state.get_mut(world);
 
+    // Check the reader isn't empty first
+    if state_mut.1.is_empty() { return; }
+
     // Get all userkeys pending disconnection
     let mut keys_to_disconnect: Vec<UserKey> = Vec::with_capacity(state_mut.1.iter().len());
     for event in state_mut.1.iter() {
