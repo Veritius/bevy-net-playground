@@ -4,6 +4,7 @@ use playground_shared::bevy::prelude::*;
 pub mod events;
 pub mod room;
 pub mod entity;
+pub mod replication;
 
 mod bind;
 
@@ -30,6 +31,7 @@ impl Plugin for NetworkManagementPlugin {
 
         app.add_systems((
             entity::disconnect_on_removed_component_system,
+            replication::replication_component_system,
         ));
         app.add_system(entity::disconnect_exclusive_system);
     }
