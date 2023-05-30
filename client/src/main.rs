@@ -3,7 +3,7 @@ pub mod network;
 use bevy_egui::EguiPlugin;
 use naia_bevy_client::{Plugin as ClientPlugin, ClientConfig};
 use network::NetworkManagementPlugin;
-use playground_shared::{bevy::prelude::*, network::protocol};
+use playground_shared::{bevy::prelude::*, protocol::protocol};
 
 fn main() {
     let mut app = App::default();

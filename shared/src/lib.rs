@@ -4,5 +4,5 @@ pub use once_cell;
 pub use semver;
 pub use bevy::ecs as bevy_ecs;
 
-pub mod network;
+pub mod protocol;
 pub mod version;

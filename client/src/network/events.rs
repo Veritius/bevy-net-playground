@@ -1,6 +1,6 @@
 use std::{net::{IpAddr, AddrParseError, SocketAddr}, str::FromStr};
 use naia_bevy_client::{Client, transport::udp::Socket, events::{ConnectEvent, RejectEvent, DisconnectEvent}};
-use playground_shared::{bevy_ecs::prelude::EventReader, network::auth::AuthMessage, bevy::prelude::info};
+use playground_shared::{bevy_ecs::prelude::EventReader, protocol::auth::AuthMessage, bevy::prelude::info};
 
 pub(super) fn connect_events(
     client: Client,

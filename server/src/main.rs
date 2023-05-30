@@ -3,7 +3,7 @@ pub mod network;
 use std::time::Duration;
 use naia_bevy_server::{Plugin as ServerPlugin, ServerConfig};
 use network::NetworkManagementPlugin;
-use playground_shared::{bevy::{prelude::*, app::ScheduleRunnerSettings, diagnostic::DiagnosticsPlugin, log::LogPlugin}, network::protocol};
+use playground_shared::{bevy::{prelude::*, app::ScheduleRunnerSettings, diagnostic::DiagnosticsPlugin, log::LogPlugin}, protocol::protocol};
 
 /// The amount of ticks per second the server will try to match.
 const SERVER_TICK_RATE: u32 = 60;
