@@ -1,7 +1,7 @@
 use naia_bevy_shared::{Message, ProtocolPlugin};
 use crate::version::GAME_VERSION_STRING;
 
-pub struct AuthenticationNetPlugin;
+pub(super) struct AuthenticationNetPlugin;
 
 impl ProtocolPlugin for AuthenticationNetPlugin {
     fn build(&self, protocol: &mut naia_bevy_shared::Protocol) {
