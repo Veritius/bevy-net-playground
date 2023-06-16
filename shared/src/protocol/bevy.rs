@@ -1,6 +1,37 @@
 use bevy::prelude::*;
 use naia_bevy_shared::{Serde, BitReader, BitWrite, SerdeErr};
 
+/// Extensions for the [BitWrite] trait. Automatically implemented for all types implementing `BitWrite`.
+pub trait BitWriteExt: BitWrite {
+    fn write_iter(&mut self, iter: impl Iterator<Item = u32>);
+}
+
+impl<T: BitWrite> BitWriteExt for T {
+    fn write_iter(&mut self, iter: impl Iterator<Item = u32>) {
+        for item in iter {
+            self.write_bits(item);
+        }
+    }
+}
+
+/// Extensions for [BitReader].
+pub trait BitReaderExt {
+    fn read_bits(&mut self) -> Result<u32, SerdeErr>;
+}
+
+impl BitReaderExt for BitReader<'_> {
+    fn read_bits(&mut self) -> Result<u32, SerdeErr> {
+        let mut v = [0u8; 4];
+        for i in 0..=3 {
+            let byte = self.read_byte();
+            if byte.is_err() { return Err(byte.unwrap_err()) }
+            v[i] = byte.unwrap();
+        }
+
+        Ok(u32::from_ne_bytes(v))
+    }
+}
+
 pub struct ExternalWrapper<T>(pub T);
 
 impl<T: PartialEq> PartialEq for ExternalWrapper<T> {
