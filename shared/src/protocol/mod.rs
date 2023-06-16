@@ -1,4 +1,5 @@
 pub mod auth;
+pub mod bevy;
 
 use std::time::Duration;
 use naia_bevy_shared::{Protocol, LinkConditionerConfig};
