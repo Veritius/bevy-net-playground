@@ -51,6 +51,7 @@ impl Serde for ExternalWrapper<Vec3> {
         let v = self.0;
         writer.write_bits(v.x.to_bits());
         writer.write_bits(v.y.to_bits());
+        writer.write_bits(v.z.to_bits());
     }
 
     fn de(reader: &mut BitReader) -> Result<Self, SerdeErr> {
