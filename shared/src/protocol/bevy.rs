@@ -1,3 +1,5 @@
+use std::ops::Deref;
+
 use bevy::prelude::*;
 use naia_bevy_shared::{Serde, BitReader, BitWrite, SerdeErr};
 
@@ -37,6 +39,20 @@ pub struct ExternalWrapper<T>(pub T);
 impl<T: PartialEq> PartialEq for ExternalWrapper<T> {
     fn eq(&self, other: &Self) -> bool {
         self.0 == other.0
+    }
+}
+
+impl<T: Eq> Eq for ExternalWrapper<T> {}
+
+impl<T: PartialOrd> PartialOrd for ExternalWrapper<T> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        self.0.partial_cmp(&other.0)
+    }
+}
+
+impl<T: Ord> Ord for ExternalWrapper<T> {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.0.cmp(&other.0)
     }
 }
 
