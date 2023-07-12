@@ -33,41 +33,42 @@ impl BitReaderExt for BitReader<'_> {
     }
 }
 
-pub struct ExternalWrapper<T>(pub T);
+/// A wrapper type for Naia's [Serde] trait.
+pub struct SerdeWrapper<T>(pub T);
 
-impl<T: Hash> Hash for ExternalWrapper<T> {
+impl<T: Hash> Hash for SerdeWrapper<T> {
     fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
         self.0.hash(state);
     }
 }
 
-impl<T: PartialEq> PartialEq for ExternalWrapper<T> {
+impl<T: PartialEq> PartialEq for SerdeWrapper<T> {
     fn eq(&self, other: &Self) -> bool {
         self.0 == other.0
     }
 }
 
-impl<T: Eq> Eq for ExternalWrapper<T> {}
+impl<T: Eq> Eq for SerdeWrapper<T> {}
 
-impl<T: PartialOrd> PartialOrd for ExternalWrapper<T> {
+impl<T: PartialOrd> PartialOrd for SerdeWrapper<T> {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         self.0.partial_cmp(&other.0)
     }
 }
 
-impl<T: Ord> Ord for ExternalWrapper<T> {
+impl<T: Ord> Ord for SerdeWrapper<T> {
     fn cmp(&self, other: &Self) -> std::cmp::Ordering {
         self.0.cmp(&other.0)
     }
 }
 
-impl<T: Clone> Clone for ExternalWrapper<T> {
+impl<T: Clone> Clone for SerdeWrapper<T> {
     fn clone(&self) -> Self {
         Self(self.0.clone())
     }
 }
 
-impl Serde for ExternalWrapper<Vec2> {
+impl Serde for SerdeWrapper<Vec2> {
     fn ser(&self, writer: &mut dyn BitWrite) {
         let v = self.0;
         writer.write_bits(v.x.to_bits());
@@ -95,7 +96,7 @@ impl Serde for ExternalWrapper<Vec2> {
     }
 }
 
-impl Serde for ExternalWrapper<Vec3> {
+impl Serde for SerdeWrapper<Vec3> {
     fn ser(&self, writer: &mut dyn BitWrite) {
         let v = self.0;
         writer.write_bits(v.x.to_bits());
@@ -124,7 +125,7 @@ impl Serde for ExternalWrapper<Vec3> {
     }
 }
 
-impl Serde for ExternalWrapper<Quat> {
+impl Serde for SerdeWrapper<Quat> {
     fn ser(&self, writer: &mut dyn BitWrite) {
         let v = self.0.to_array();
         for i in 0..=3 {
@@ -153,7 +154,7 @@ impl Serde for ExternalWrapper<Quat> {
     }
 }
 
-impl Serde for ExternalWrapper<Color> {
+impl Serde for SerdeWrapper<Color> {
     fn ser(&self, writer: &mut dyn BitWrite) {
         let v = self.0.as_linear_rgba_f32();
         for x in v {
@@ -182,11 +183,11 @@ impl Serde for ExternalWrapper<Color> {
     }
 }
 
-impl Serde for ExternalWrapper<Transform> {
+impl Serde for SerdeWrapper<Transform> {
     fn ser(&self, writer: &mut dyn BitWrite) {
-        let pos = ExternalWrapper(self.0.translation);
-        let rot = ExternalWrapper(self.0.rotation);
-        let sca = ExternalWrapper(self.0.scale);
+        let pos = SerdeWrapper(self.0.translation);
+        let rot = SerdeWrapper(self.0.rotation);
+        let sca = SerdeWrapper(self.0.scale);
 
         pos.ser(writer);
         rot.ser(writer);
@@ -194,15 +195,15 @@ impl Serde for ExternalWrapper<Transform> {
     }
 
     fn de(reader: &mut BitReader) -> Result<Self, SerdeErr> {
-        let pos = ExternalWrapper::<Vec3>::de(reader);
-        let rot = ExternalWrapper::<Quat>::de(reader);
-        let sca = ExternalWrapper::<Vec3>::de(reader);
+        let pos = SerdeWrapper::<Vec3>::de(reader);
+        let rot = SerdeWrapper::<Quat>::de(reader);
+        let sca = SerdeWrapper::<Vec3>::de(reader);
         
         if pos.is_err() | rot.is_err() | sca.is_err() {
             return Err(SerdeErr)
         }
 
-        Ok(ExternalWrapper(Transform {
+        Ok(SerdeWrapper(Transform {
             translation: pos.unwrap().0,
             rotation: rot.unwrap().0,
             scale: sca.unwrap().0
