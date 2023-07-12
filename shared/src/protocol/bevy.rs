@@ -1,5 +1,4 @@
-use std::ops::Deref;
-
+use std::hash::Hash;
 use bevy::prelude::*;
 use naia_bevy_shared::{Serde, BitReader, BitWrite, SerdeErr};
 
@@ -35,6 +34,12 @@ impl BitReaderExt for BitReader<'_> {
 }
 
 pub struct ExternalWrapper<T>(pub T);
+
+impl<T: Hash> Hash for ExternalWrapper<T> {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.0.hash(state);
+    }
+}
 
 impl<T: PartialEq> PartialEq for ExternalWrapper<T> {
     fn eq(&self, other: &Self) -> bool {
