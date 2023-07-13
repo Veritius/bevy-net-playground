@@ -1,5 +1,6 @@
 pub mod auth;
-pub mod movement;
+pub mod input;
+pub mod transform;
 
 use std::time::Duration;
 use naia_bevy_shared::{Protocol, LinkConditionerConfig};
@@ -19,7 +20,8 @@ pub fn protocol() -> Protocol {
     protocol.link_condition(LinkConditionerConfig::good_condition());
 
     protocol.add_plugin(auth::AuthenticationNetPlugin);
-    protocol.add_plugin(movement::PlayerMovementPlugin);
+    protocol.add_plugin(input::PlayerInputPlugin);
+    protocol.add_plugin(transform::TransformUpdatePlugin);
 
     protocol.build()
 }

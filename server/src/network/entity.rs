@@ -4,8 +4,7 @@ use std::collections::HashMap;
 use naia_bevy_server::UserKey;
 use naia_server::Server as NaiaServer;
 use playground_shared::bevy::prelude::*;
-use playground_shared::bevy_ecs;
-use playground_shared::bevy_ecs::system::SystemState;
+use playground_shared::bevy_ecs::{self, system::SystemState};
 use playground_shared::naia_bevy_shared::WorldMut;
 
 /// Used for removal detection.

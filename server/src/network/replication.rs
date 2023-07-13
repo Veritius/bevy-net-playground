@@ -6,13 +6,13 @@ use playground_shared::bevy_ecs;
 
 /// Entities with this component are marked to be replicated by Naia.
 #[derive(Component)]
-pub struct Replicated;
+pub struct ReplicatedEntity;
 
 pub(super) fn replication_component_system(
     mut server: Server,
     mut commands: Commands,
-    added: Query<Entity, Added<Replicated>>,
-    mut removed: RemovedComponents<Replicated>,
+    added: Query<Entity, Added<ReplicatedEntity>>,
+    mut removed: RemovedComponents<ReplicatedEntity>,
 ) {
     for entity in added.iter() {
         commands.entity(entity).enable_replication(&mut server);

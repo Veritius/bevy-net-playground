@@ -5,6 +5,7 @@ pub mod events;
 pub mod room;
 pub mod entity;
 pub mod replication;
+pub mod transform;
 
 mod bind;
 
