@@ -7,4 +7,4 @@ members = [
 ]
 
 [patch.crates-io]
-naia-shared = { git = "https://github.com/Veritius/naia-changes.git", branch = "intermission-one" }
+naia-shared = { git = "https://github.com/Veritius/naia-changes.git", branch = "glam-and-bevy-tests" }

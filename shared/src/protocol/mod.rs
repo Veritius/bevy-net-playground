@@ -1,5 +1,4 @@
 pub mod auth;
-pub mod externals;
 pub mod movement;
 
 use std::time::Duration;

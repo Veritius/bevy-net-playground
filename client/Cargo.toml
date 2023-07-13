@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 playground_shared = { path = "../shared" }
-naia-bevy-client = { version = "0.21.0", features = ["transport_udp"] }
+naia-bevy-client = { git = "https://github.com/Veritius/naia-changes.git", branch = "glam-and-bevy-tests", features = ["transport_udp"] }
 bevy_egui = "0.20.0"
 
 [features]
